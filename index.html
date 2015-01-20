@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>My Angular App!</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="libraries/angular.min.js"></script>
+    <script src="libraries/angular-ui-router.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/01-controllers.js"></script>
+    <script src="controllers/MainCtrl.js"></script>
+    <script src="services/01-services.js"></script>
+    <script src="services/postHandler.js"></script>
+    <style> .glyphicon-thumbs-up { cursor:pointer } </style>
+  </head>
+  <body ng-app="flapperNews" ng-controller="MainCtrl as vm">
+    <div class="row">
+    	<div class="col-md-6 col-md-offset-3">
+    		
+        <div class="page-header">
+    			<h1>Flapper news</h1>
+    		</div>
+
+        <div ng-repeat="post in vm.posts | orderBy: '-upvotes'">
+          <span style="font-size:20px; margin-left:10px">
+            <a ng-if="post.link" href="{{post.link}}" target="_blank">{{post.title}}</a>
+            <span ng-if="!post.link">{{post.title}}</span> 
+          </span>
+          {{post.upvotes}}
+          <span ng-if="post" class="glyphicon glyphicon-thumbs-up" ng-click="vm.upvote(post)"></span>
+        </div>
+
+        <form  ng-submit="vm.addPost()" style="margin-top:30px;">
+          <h3>Add new post</h3>
+          <div class="form-group">
+            <input class="form-control" ng-model="vm.title" placeholder="title" type="text" />
+          </div>
+          <div class="form-group">
+            <input class="form-control" ng-model="vm.link" placeholder="Link" type="text" />
+          </div>
+          
+          <button class="btn btn-primary" type="submit">Add post</button>
+        </form>
+      </div>
+     	
+    	
+    </div>
+  </body>
+</html>
