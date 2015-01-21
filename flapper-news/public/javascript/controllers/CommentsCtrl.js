@@ -1,4 +1,4 @@
-angular.module('flapperNews.controllers', [])
+/*angular.module('flapperNews.controllers', [])
 	.controller('MainCtrl', ['postsHandler' , function(postsHandler){
 	var vm = this;
 	
@@ -28,4 +28,8 @@ angular.module('flapperNews.controllers', [])
 	//initialize controller
 	updatePosts();
 
-}]);
+}]);*/
+angular.module('flapperNews.controllers', [])
+	.controller('CommentsCtrl', [function () {
+		var vm = this;
+	}]);
