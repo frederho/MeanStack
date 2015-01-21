@@ -28,4 +28,9 @@ angular.module('flapperNews.controllers',[])
 		//initialize controller
 		updatePosts();
 
+	}]).controller('CommentsCtrl', [
+	'$stateParams',
+	'postsHandler',	function($stateParams, postsHandler){
+		var vm = this;
+		vm.post = postsHandler.getPost($stateParams.id);
 	}]);
