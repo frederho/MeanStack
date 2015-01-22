@@ -11,9 +11,19 @@
 
 <div ng-repeat="comment in vm.post.comments | orderBy:'-upvotes'">
 	<span class="glyphicon glyphicon-thumbs-up"
-	  ng-click="vm.upvote(comment)"></span>
-		{{comment.upvotes}} - by {{comment.author}}
+	  ng-click="vm.upvoteComment(comment)">
+	</span>
+	{{comment.upvotes}} - by {{comment.author}}
 	<span style="font-size:20px; margin-left:10px;">
 	  {{comment.body}}
-</span>
+	</span>
 </div>
+
+<form ng-submit="vm.addComment()" style="margin-top:30px">
+	<h3>Add a new Comment</h3>
+
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="Comment" ng-model="vm.body" />
+		<button type="submit" class="btn btn-primary">Post</button>
+	</div>
+</form>
