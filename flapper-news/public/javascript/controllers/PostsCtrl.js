@@ -15,7 +15,8 @@ angular.module('flapperNews.controllers',[])
 			var newPost = {
 				title: vm.title, 
 				link: vm.link,
-				upvotes: 0
+				upvotes: 0,
+				comments: []
 			};
 			vm.posts = postsHandler.addPost(newPost);
 			resetPostModel();
