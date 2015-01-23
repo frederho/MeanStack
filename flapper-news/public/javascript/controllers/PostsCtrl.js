@@ -17,10 +17,8 @@ angular.module('flapperNews.controllers',[])
 		};
 
 		var updatePosts = function() {
-			
 			postsHandler.getPosts()
-			.then(onPosts)
-			.then(onError);
+			.then(onPosts, onError);
 
 
 		};
@@ -32,12 +30,16 @@ angular.module('flapperNews.controllers',[])
 				upvotes: 0,
 				comments: []
 			};
-			vm.posts = postsHandler.addPost(newPost);
+			postsHandler.addPost(newPost)
+			.then(updatePosts, onError);
 			resetPostModel();
 		};
 
 		vm.upvote = function(post){
-			post.upvotes += 1;
+			postsHandler.upvotePost(post)
+			.then(function(post){
+				post += 1;
+			}, onError);
 		};
 
 		//initialize controller
