@@ -7,13 +7,27 @@ angular.module('flapperNews.controllers',[])
 			vm.link = "";
 
 		};
+
+		var onPosts = function (response){
+			vm.posts = response.data;
+		};
+
+		var onError = function (error) {
+			console.log(error.statusText);
+		};
+
 		var updatePosts = function() {
-			vm.posts = postsHandler.getPosts();
+			
+			postsHandler.getPosts()
+			.then(onPosts)
+			.then(onError);
+
+
 		};
 
 		vm.addPost = function(){
 			var newPost = {
-				title: vm.title, 
+				title: vm.title,
 				link: vm.link,
 				upvotes: 0,
 				comments: []

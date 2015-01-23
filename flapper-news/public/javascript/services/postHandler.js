@@ -1,17 +1,13 @@
 angular.module('flapperNews.services',[])
-	.factory('postsHandler', [function(){
-		var o = [{
-			title: 'test', 
-			link: 'www.sol.no',
-			upvotes: 0,
-			comments: [
-			    {author: 'Joe', body: 'Cool post!', upvotes: 0},
-			    {author: 'Bob', body: 'Great idea but everything is wrong!', upvotes: 0}
-		  	]	
-		}];
+	.factory('postsHandler', ['$http', function($http){
+		var o = [];
 
 		var getPosts = function (){
-			return o;
+			return $http.get('/posts')
+			.success(function (response) {
+				var posts = response.data;
+				return posts;
+			});
 		};
 		
 		var addNewPost = function (post) {
