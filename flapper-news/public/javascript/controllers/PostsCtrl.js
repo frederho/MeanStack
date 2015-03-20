@@ -38,7 +38,6 @@ angular.module('flapperNews.controllers')
 		vm.upvote = function(post){
 			postsHandler.upvotePost(post)
 			.then(function(post){
-				console.log("Value updated");
 				post += 1;
 			}, onError);
 		};

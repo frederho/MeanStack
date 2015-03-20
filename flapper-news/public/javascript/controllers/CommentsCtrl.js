@@ -1,12 +1,21 @@
-angular.module('flapperNews.controllers').controller('CommentsCtrl', [
+angular.module('flapperNews.controllers')
+.controller('CommentsCtrl', [
 	'$stateParams',
 	'postsHandler',	function($stateParams, postsHandler){
 		var vm = this;
 		vm.body = '';
-		vm.post = postsHandler.getPost($stateParams.id);
-
+		
 		vm.upvoteComment = function (comment){
 			comment.upvotes += 1;
+		};
+
+		var onPost = function (response){
+			vm.post = response.data;
+			console.log(response);
+		};
+
+		var onError = function (error) {
+			console.log(error.statusText);
 		};
 
 		vm.addComment = function () {
@@ -19,4 +28,6 @@ angular.module('flapperNews.controllers').controller('CommentsCtrl', [
 			vm.body = '';
 
 		};
+
+		postsHandler.getPost($stateParams.id).then(onPost, onError);
 	}]);

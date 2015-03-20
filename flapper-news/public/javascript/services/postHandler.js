@@ -19,10 +19,16 @@ angular.module('flapperNews.services',[])
 		};
 
 		var getPost = function (id) {
-			return o[id];
+			return $http.get('posts/'+id)
+			.then(function (response)
+				{
+					var post = response.data;
+					return post;
+				});
 		};
 
 		var upvotePost = function (post) {
+			console.log(post._id);
 			return $http.put('posts/' + post._id + '/upvote')
 			.success(function(response){
 				var reqResponse = response.data;
